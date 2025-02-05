@@ -1,0 +1,15 @@
+{
+  "name": "valstore-arg",
+  "version": "1.0.0",
+  "description": "Modelo ECommerce de venta de skins del juego Valorant ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git remote add origin https://github.com/SantiagoMinelli/ValStoreArg.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

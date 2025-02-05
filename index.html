@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/estilos.css" />
+
+    <!-- Icono Pestaña -->
+    <link rel="shortcut icon" href="./img/icono-pestaña.png" />
+    
+    <!-- Animaciones -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <title>ValStore ARG</title>
+    </head>
+    <body>
+        <!-- Encabezado -->
+        <header>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ofertas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tienda" aria-current="page" href="./index.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Carrito</a>
+                </li>
+            </ul>
+        </header>
+
+        <main>
+            <section class="mercado-nocturno">
+                <div class="encabezado">
+                    <h1>MERCADO NOCTURNO</h1>
+                    <p>Haz click sobre las tarjetas para descubrir las skins sorpresa de este mercado nocturno</p>
+                </div>
+
+                <div class="card" onclick="revealContent(this)" >
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <!-- Imagen inicial -->
+                            <img src="./img/tarjeta-medio.jpg" alt="Imagen Inicial" class="card-img">
+                        </div>
+                        <div class="card-back">
+                            <!-- Imagen que se muestra después del clic -->
+                            <img src="./img/skin-chronovoid-phantom-mercado-nocturno.jpg" alt="Imagen Final" class="card-img">
+                            <p class="precio-anterior">2,500</p>
+                            <p class="precio-nuevo">1,850</p>
+                            <h2>PHANTOM</h2>
+                            <h3>CHRONOVOID</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" onclick="revealContent(this)">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <!-- Imagen inicial -->
+                            <img src="./img/tarjeta-medio.jpg" alt="Imagen Inicial" class="card-img">
+                        </div>
+                        <div class="card-back">
+                            <!-- Imagen que se muestra después del clic -->
+                            <img src="./img/skin-glichtpop2.0-vandal-mercado-nocturno.jpg" alt="Imagen Final" class="card-img">
+                            <p class="precio-anterior">3,420</p>
+                            <p class="precio-nuevo">2,360</p>
+                            <h2>VANDAL</h2>
+                            <h3>GLICHTPOP 2.0</h3>
+                        </div>
+                    </div>
+                </div>  
+
+                <div class="card" onclick="revealContent(this)">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <!-- Imagen inicial -->
+                            <img src="./img/tarjeta-medio.jpg" alt="Imagen Inicial" class="card-img">
+                        </div>
+                        <div class="card-back">
+                            <!-- Imagen que se muestra después del clic -->
+                            <img src="./img/skin-prelude-chaos-knife-mercado-nocturno.jpg" alt="Imagen Final" class="card-img">
+                            <p class="precio-anterior">2,000</p>
+                            <p class="precio-nuevo">1,555</p>
+                            <h2>KNIFE</h2>
+                            <h3>PRELUDE CHAOS</h3>
+                        </div>
+                    </div>
+                </div> 
+                
+                <div class="card" onclick="revealContent(this)">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <!-- Imagen inicial -->
+                            <img src="./img/tarjeta-medio.jpg" alt="Imagen Inicial" class="card-img">
+                        </div>
+                        <div class="card-back">
+                            <!-- Imagen que se muestra después del clic -->
+                            <img src="./img/skin-mega-punk-sherif-mercado-nocturno.jpg" alt="Imagen Final" class="card-img">
+                            <p class="precio-anterior">2,000</p>
+                            <p class="precio-nuevo">1,300</p>
+                            <h2>SHERIF</h2>
+                            <h3>MEGA PUNK</h3>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="card" onclick="revealContent(this)">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <!-- Imagen inicial -->
+                            <img src="./img/tarjeta-medio.jpg" alt="Imagen Inicial" class="card-img">
+                        </div>
+                        <div class="card-back">
+                            <!-- Imagen que se muestra después del clic -->
+                            <img src="./img/skin-aemondir-bulldog-mercado-nocturno.jpg" alt="Imagen Final" class="card-img">
+                            <p class="precio-anterior">3,400</p>
+                            <p class="precio-nuevo">2,180</p>
+                            <h2>BULLDOG</h2>
+                            <h3>AEMONDIR</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="revealContent(this)">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <!-- Imagen inicial -->
+                            <img src="./img/tarjeta-medio.jpg" alt="Imagen Inicial" class="card-img">
+                        </div>
+                        <div class="card-back">
+                            <!-- Imagen que se muestra después del clic -->
+                            <img src="./img/skin-gaia-vengance-ghost-mercado-nocturno.jpg" alt="Imagen Final" class="card-img">
+                            <p class="precio-anterior">1,460</p>
+                            <p class="precio-nuevo">970</p>
+                            <h2>GHOST</h2>
+                            <h3>GAIA'S VENGANCE</h3>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+            <section class="tienda">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <div class="card">
+                                <!-- Imagen que se muestra en cabecera -->
+                                <img src="./img/pack-skin-araxys.jpg" alt="Imagen Final" class="card-img">
+                                <h4>ARAXYS</h4>
+                                <p>COLLECTION</p>
+                                <button>4,655</button>
+                            </div>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-araxys-bulldog.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>ARAXYS // BULLDOG</h5>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-araxys-operator.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>ARAXYS // OPERATOR</h5>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-araxys-vandal.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>ARAXYS // VANDAL</h5>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-araxys-knife-shorty.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>ARAXYS // KNIFE & SHORTY</h5>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+            </section>
+
+            <section class="tienda-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <div class="card">
+                                <!-- Imagen que se muestra en cabecera -->
+                                <img src="./img/pack-skin-gaia.jpg" alt="Imagen Final" class="card-img">
+                                <h4>GAIA'S</h4>
+                                <p>COLLECTION</p>
+                                <button>4,655</button>
+                            </div>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-gaia-phantom.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>GAIA'S // PHANTOM</h5>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-gaia-ares.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>GAIA'S // ARES</h5>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-gaia-shorty.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>GAIA'S // SHORTY</h5>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-gaia-bucky.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>GAIA'S // BUCKY</h5>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+            </section>
+
+            <section class="tienda-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <div class="card">
+                                <!-- Imagen que se muestra en cabecera -->
+                                <img src="./img/pack-skin-prime2.0.jpg" alt="Imagen Final" class="card-img">
+                                <h4>PRIME 2.0</h4>
+                                <p>COLLECTION</p>
+                                <button>4,655</button>
+                            </div>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-prime2.0-odin.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>PRIME 2.0 // ODIN</h5>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-prime2.0-knife-frenzy.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>PRIME 2.0 // KNIFE & FRENZY</h5>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-prime2.0-phantom.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>PRIME 2.0 // PHANTOM</h5>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-tienda" onclick="">
+                                <!-- Imagen que se muestra después del clic -->
+                                <img src="./img/skin-prime2.0-bucky.jpg" alt="Imagen Final" class="card-img">
+                                <p>1,300</p>
+                                <h5>PRIME 2.0 // BUCKY</h5>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+            </section>
+        </main>
+
+        <script src="./js/app.js"></script>
+    </body>
+</html>

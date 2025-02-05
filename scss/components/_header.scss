@@ -1,0 +1,49 @@
+//* NAVBAR
+header{
+    background: #000000;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 4;
+    ul{
+        list-style: none;
+        text-decoration: none;
+        justify-content: center;
+        display: flex;
+        padding: 0;
+        margin: 10px 0;
+    .nav-item{
+        margin: 0 10px;
+        .nav-link{
+            display: inline-block;
+            padding: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(255,0,0,1) 100%);
+            border: 2px solid transparent;
+            box-shadow: 0 4px 10px rgb(101, 101, 101);
+            transition: all 0.5s ease;
+            &:hover {
+                background: radial-gradient(circle, rgb(116, 67, 67) 0%, rgba(255,0,0,1) 100%);
+                border-color: rgb(255, 255, 255);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+                transform: translateY(-3px);
+            }
+        }
+        .tienda{
+            padding: 12px 20px;
+            text-align: center;
+            background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(255,0,0,1) 100%);
+            border-color: rgb(255, 255, 255);
+            &:hover {
+                background: radial-gradient(circle, rgb(116, 67, 67) 0%, rgba(255,0,0,1) 100%);
+                transform: translateY(-1);
+            }
+        }
+    }
+    }
+}
