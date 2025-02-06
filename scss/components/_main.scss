@@ -75,7 +75,7 @@ main{
                         font-size: 15px;
                         text-decoration: line-through;
                     }
-                    .precio-nuevo{
+                    .precio{
                         position: absolute;
                         top: 20px;
                         right: 10px;
@@ -126,36 +126,37 @@ main{
                         img{
                             object-fit: cover; 
                             clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 20% 100%, 0% 80%);
+                            cursor: pointer;
                         }
-                        h4{
+                        h2{
                             position: absolute;
                             top: 30px;
                             left: 30px;
                             color: white;
                             font-size: 60px;
+                            cursor: pointer;
                         }
-                        p{
+                        h3{
                             position: absolute;
                             top: 100px;
-                            left: 30px;
+                            left: 35px;
                             color: white;
                             font-size: 15px;
                             font-weight: lighter;
+                            cursor: pointer;
                         }
-                        button{
+                        p{
                             background: radial-gradient(circle, rgba(120,150,150,1) 0%, rgb(0, 178, 178) 100%);
                             position: absolute;
                             color: white;
-                            font-size: 20px;
+                            font-size: 30px;
                             font-weight: bolder;
                             padding: 5px 50px;
-                            border-color: white;
-                            bottom: 120px;
-                            right: 80px;
+                            border: solid white 1.2px;
+                            top: 30px;
+                            right: 30px;
                             transition: transform 1s ease;
-                            &:hover{
-                                background: radial-gradient(circle, rgba(120,150,150,1) 0%, rgb(0, 213, 213) 100%);
-                            }
+                            cursor: pointer;
                         }
                     }
                 }
@@ -185,10 +186,18 @@ main{
                             left: 5px;
                             z-index: 2; 
                         }
-                        h5{
+                        h2{
                             color: white;
                             position: absolute;
-                            bottom: 10px; 
+                            bottom: 25px; 
+                            left: 15px;
+                            font-size: 17px;
+                            z-index: 2; 
+                        }
+                        h3{
+                            color: white;
+                            position: absolute;
+                            bottom: 6px; 
                             left: 15px;
                             font-size: 17px;
                             z-index: 2; 
@@ -198,10 +207,12 @@ main{
             }
         }
     }
-    .tienda-2{
+
+    //* OFERTAS
+    .ofertas{
         width: 100%;
         height: 100%;
-        background-image: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(245,246,252,0) 50%, rgba(0,0,0,1) 100%),url(../img/tienda.jpg);
+        background-image: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(245,246,252,0) 50%, rgba(0,0,0,1) 100%),url(../img/ofertas.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: top;
@@ -210,52 +221,7 @@ main{
         .container{
             .row{
                 position: relative;
-                z-index: 1;
-                .col-10{
-                    .card{
-                        overflow: hidden;
-                        clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 20% 100%, 0% 80%);
-                        img{
-                            object-fit: cover; 
-                            clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 20% 100%, 0% 80%);
-                        }
-                        h4{
-                            position: absolute;
-                            top: 30px;
-                            left: 30px;
-                            color: white;
-                            font-size: 60px;
-                        }
-                        p{
-                            position: absolute;
-                            top: 100px;
-                            left: 30px;
-                            color: white;
-                            font-size: 15px;
-                            font-weight: lighter;
-                        }
-                        button{
-                            background: radial-gradient(circle, rgba(120,150,150,1) 0%, rgb(0, 178, 178) 100%);
-                            position: absolute;
-                            color: white;
-                            font-size: 20px;
-                            font-weight: bolder;
-                            padding: 5px 50px;
-                            border-color: white;
-                            bottom: 120px;
-                            right: 80px;
-                            transition: transform 1s ease;
-                            &:hover{
-                                background: radial-gradient(circle, rgba(120,150,150,1) 0%, rgb(0, 213, 213) 100%);
-                            }
-                        }
-                    }
-                }
-            }
-            .row{
-                position: relative;
-                z-index: 2;
-                margin-top: -100px;
+                padding-bottom: 15px;
                 .col-3{
                     .card-tienda{
                         position: relative;
@@ -264,123 +230,111 @@ main{
                             transform: scale(1.03);
                             cursor: pointer;
                         }
-                        img{
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover; 
-                            z-index: 0; 
-                        }
-                        p{
-                            color: white;
+                        .precio-anterior{
                             position: absolute;
-                            top: 10px; 
+                            top: 3px;
                             left: 5px;
-                            z-index: 2; 
+                            color: rgb(0, 0, 0);
+                            font-size: 13px;
+                            text-decoration: line-through;
                         }
-                        h5{
-                            color: white;
+                        .precio-nuevo{
                             position: absolute;
-                            bottom: 10px; 
-                            left: 15px;
-                            font-size: 17px;
-                            z-index: 2; 
+                            top: 20px;
+                            left: 4px;
+                            color: white;
+                            font-size: 16px;
+                        }
+                        h2{
+                            position: absolute;
+                            color: white;
+                            font-size: 20px;
+                            bottom: 10px;
+                            left: 10px;
                         }
                     }
                 }
             }
         }
     }
-    .tienda-3{
+
+    //* MODAL
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 3;
+        left: 0;
+        top: 0;
         width: 100%;
         height: 100%;
-        background-image: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(245,246,252,0) 50%, rgba(0,0,0,1) 100%),url(../img/tienda.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: top;
-        padding-bottom: 80px;
-        padding-top: 50px;
-        .container{
-            .row{
-                position: relative;
-                z-index: 1;
-                .col-10{
-                    .card{
-                        overflow: hidden;
-                        clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 20% 100%, 0% 80%);
-                        img{
-                            object-fit: cover; 
-                            clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 20% 100%, 0% 80%);
-                        }
-                        h4{
-                            position: absolute;
-                            top: 30px;
-                            left: 30px;
-                            color: white;
-                            font-size: 60px;
-                        }
-                        p{
-                            position: absolute;
-                            top: 100px;
-                            left: 30px;
-                            color: white;
-                            font-size: 15px;
-                            font-weight: lighter;
-                        }
-                        button{
-                            background: radial-gradient(circle, rgba(120,150,150,1) 0%, rgb(0, 178, 178) 100%);
-                            position: absolute;
-                            color: white;
-                            font-size: 20px;
-                            font-weight: bolder;
-                            padding: 5px 50px;
-                            border-color: white;
-                            bottom: 120px;
-                            right: 80px;
-                            transition: transform 1s ease;
-                            &:hover{
-                                background: radial-gradient(circle, rgba(120,150,150,1) 0%, rgb(0, 213, 213) 100%);
-                            }
-                        }
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        .modal-content {
+            background-color: #535353;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #8f1818;
+            width: 80%;
+            max-width: 500px;
+            .modal-header {
+                font-size: 20px;
+                margin-bottom: 10px;
+                .modal-close {
+                    cursor: pointer;
+                    color: #ffffff;
+                    &:hover{
+                        color: rgb(201, 30, 30);
+                        text-decoration: none;
+                    }
+                    &:focus {
+                        color: rgb(201, 30, 30);
+                        text-decoration: none;
                     }
                 }
             }
-            .row{
-                position: relative;
-                z-index: 2;
-                margin-top: -100px;
-                .col-3{
-                    .card-tienda{
-                        position: relative;
-                        transition: transform 1s ease;
-                        &:hover {
-                            transform: scale(1.03);
-                            cursor: pointer;
-                        }
-                        img{
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover; 
-                            z-index: 0; 
-                        }
-                        p{
-                            color: white;
-                            position: absolute;
-                            top: 10px; 
-                            left: 5px;
-                            z-index: 2; 
-                        }
-                        h5{
-                            color: white;
-                            position: absolute;
-                            bottom: 10px; 
-                            left: 15px;
-                            font-size: 17px;
-                            z-index: 2; 
-                        }
+            .modal-body {
+                margin-bottom: 20px;
+                text-align: center;
+                #modal-product-name{
+                    text-align: center;
+                    font-size: 20px;
+                }
+                #modal-price{
+                    text-align: center;
+                    font-size: 18px;
+                }
+            }
+            .modal-footer {
+                display: flex;
+                justify-content: space-between;
+                .btn {
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+                .btn-secondary {
+                    padding: 10px 10px;
+                    background-color: #a22d25;
+                    color: white;
+                    &:hover{
+                        background-color: #bd291e;
+                    }
+                }
+                .btn-primary {
+                    padding: 10px 12px;
+                    background-color: #358137;
+                    color: white;
+                    &:hover{
+                        background-color: #359839;
                     }
                 }
             }
         }
+    }
+
+    //*OCULTAR SECCION
+    .section{
+        display: none;
     }
 }
 

@@ -26,6 +26,7 @@ header ul {
 }
 header ul .nav-item {
   margin: 0 10px;
+  cursor: pointer;
 }
 header ul .nav-item .nav-link {
   display: inline-block;
@@ -45,6 +46,25 @@ header ul .nav-item .nav-link:hover {
   border-color: rgb(255, 255, 255);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
   transform: translateY(-3px);
+}
+header ul .nav-item #carrito {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: rgb(253, 253, 253);
+  margin-right: 20px; /* Para separar el número del enlace */
+}
+header ul .nav-item #carrito .cantidad {
+  position: absolute;
+  top: -15px; /* Ajusta el número para que quede por encima del enlace */
+  right: -15px; /* Ajusta el número para que quede fuera del borde */
+  background-color: red;
+  color: white;
+  padding: 8px;
+  border-radius: 100%;
+  border-color: white;
+  font-size: 14px;
+  font-weight: bold;
 }
 header ul .nav-item .tienda {
   padding: 12px 20px;
@@ -136,7 +156,7 @@ main .mercado-nocturno .card .card-inner .card-back .precio-anterior {
   font-size: 15px;
   text-decoration: line-through;
 }
-main .mercado-nocturno .card .card-inner .card-back .precio-nuevo {
+main .mercado-nocturno .card .card-inner .card-back .precio {
   position: absolute;
   top: 20px;
   right: 10px;
@@ -183,36 +203,37 @@ main .tienda .container .row .col-10 .card {
 main .tienda .container .row .col-10 .card img {
   object-fit: cover;
   clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 20% 100%, 0% 80%);
+  cursor: pointer;
 }
-main .tienda .container .row .col-10 .card h4 {
+main .tienda .container .row .col-10 .card h2 {
   position: absolute;
   top: 30px;
   left: 30px;
   color: white;
   font-size: 60px;
+  cursor: pointer;
 }
-main .tienda .container .row .col-10 .card p {
+main .tienda .container .row .col-10 .card h3 {
   position: absolute;
   top: 100px;
-  left: 30px;
+  left: 35px;
   color: white;
   font-size: 15px;
   font-weight: lighter;
+  cursor: pointer;
 }
-main .tienda .container .row .col-10 .card button {
+main .tienda .container .row .col-10 .card p {
   background: radial-gradient(circle, rgb(120, 150, 150) 0%, rgb(0, 178, 178) 100%);
   position: absolute;
   color: white;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bolder;
   padding: 5px 50px;
-  border-color: white;
-  bottom: 120px;
-  right: 80px;
+  border: solid white 1.2px;
+  top: 30px;
+  right: 30px;
   transition: transform 1s ease;
-}
-main .tienda .container .row .col-10 .card button:hover {
-  background: radial-gradient(circle, rgb(120, 150, 150) 0%, rgb(0, 213, 213) 100%);
+  cursor: pointer;
 }
 main .tienda .container .row {
   position: relative;
@@ -240,185 +261,140 @@ main .tienda .container .row .col-3 .card-tienda p {
   left: 5px;
   z-index: 2;
 }
-main .tienda .container .row .col-3 .card-tienda h5 {
+main .tienda .container .row .col-3 .card-tienda h2 {
   color: white;
   position: absolute;
-  bottom: 10px;
+  bottom: 25px;
   left: 15px;
   font-size: 17px;
   z-index: 2;
 }
-main .tienda-2 {
+main .tienda .container .row .col-3 .card-tienda h3 {
+  color: white;
+  position: absolute;
+  bottom: 6px;
+  left: 15px;
+  font-size: 17px;
+  z-index: 2;
+}
+main .ofertas {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(245, 246, 252, 0) 50%, rgb(0, 0, 0) 100%), url(../img/tienda.jpg);
+  background-image: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(245, 246, 252, 0) 50%, rgb(0, 0, 0) 100%), url(../img/ofertas.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
   padding-bottom: 120px;
   padding-top: 50px;
 }
-main .tienda-2 .container .row {
+main .ofertas .container .row {
   position: relative;
-  z-index: 1;
+  padding-bottom: 15px;
 }
-main .tienda-2 .container .row .col-10 .card {
-  overflow: hidden;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 20% 100%, 0% 80%);
-}
-main .tienda-2 .container .row .col-10 .card img {
-  object-fit: cover;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 20% 100%, 0% 80%);
-}
-main .tienda-2 .container .row .col-10 .card h4 {
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  color: white;
-  font-size: 60px;
-}
-main .tienda-2 .container .row .col-10 .card p {
-  position: absolute;
-  top: 100px;
-  left: 30px;
-  color: white;
-  font-size: 15px;
-  font-weight: lighter;
-}
-main .tienda-2 .container .row .col-10 .card button {
-  background: radial-gradient(circle, rgb(120, 150, 150) 0%, rgb(0, 178, 178) 100%);
-  position: absolute;
-  color: white;
-  font-size: 20px;
-  font-weight: bolder;
-  padding: 5px 50px;
-  border-color: white;
-  bottom: 120px;
-  right: 80px;
-  transition: transform 1s ease;
-}
-main .tienda-2 .container .row .col-10 .card button:hover {
-  background: radial-gradient(circle, rgb(120, 150, 150) 0%, rgb(0, 213, 213) 100%);
-}
-main .tienda-2 .container .row {
-  position: relative;
-  z-index: 2;
-  margin-top: -100px;
-}
-main .tienda-2 .container .row .col-3 .card-tienda {
+main .ofertas .container .row .col-3 .card-tienda {
   position: relative;
   transition: transform 1s ease;
 }
-main .tienda-2 .container .row .col-3 .card-tienda:hover {
+main .ofertas .container .row .col-3 .card-tienda:hover {
   transform: scale(1.03);
   cursor: pointer;
 }
-main .tienda-2 .container .row .col-3 .card-tienda img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-main .tienda-2 .container .row .col-3 .card-tienda p {
-  color: white;
+main .ofertas .container .row .col-3 .card-tienda .precio-anterior {
   position: absolute;
-  top: 10px;
+  top: 3px;
   left: 5px;
-  z-index: 2;
+  color: rgb(0, 0, 0);
+  font-size: 13px;
+  text-decoration: line-through;
 }
-main .tienda-2 .container .row .col-3 .card-tienda h5 {
-  color: white;
+main .ofertas .container .row .col-3 .card-tienda .precio-nuevo {
   position: absolute;
-  bottom: 10px;
-  left: 15px;
-  font-size: 17px;
-  z-index: 2;
-}
-main .tienda-3 {
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(245, 246, 252, 0) 50%, rgb(0, 0, 0) 100%), url(../img/tienda.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top;
-  padding-bottom: 80px;
-  padding-top: 50px;
-}
-main .tienda-3 .container .row {
-  position: relative;
-  z-index: 1;
-}
-main .tienda-3 .container .row .col-10 .card {
-  overflow: hidden;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 20% 100%, 0% 80%);
-}
-main .tienda-3 .container .row .col-10 .card img {
-  object-fit: cover;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 20% 100%, 0% 80%);
-}
-main .tienda-3 .container .row .col-10 .card h4 {
-  position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 20px;
+  left: 4px;
   color: white;
-  font-size: 60px;
+  font-size: 16px;
 }
-main .tienda-3 .container .row .col-10 .card p {
-  position: absolute;
-  top: 100px;
-  left: 30px;
-  color: white;
-  font-size: 15px;
-  font-weight: lighter;
-}
-main .tienda-3 .container .row .col-10 .card button {
-  background: radial-gradient(circle, rgb(120, 150, 150) 0%, rgb(0, 178, 178) 100%);
+main .ofertas .container .row .col-3 .card-tienda h2 {
   position: absolute;
   color: white;
   font-size: 20px;
-  font-weight: bolder;
-  padding: 5px 50px;
-  border-color: white;
-  bottom: 120px;
-  right: 80px;
-  transition: transform 1s ease;
+  bottom: 10px;
+  left: 10px;
 }
-main .tienda-3 .container .row .col-10 .card button:hover {
-  background: radial-gradient(circle, rgb(120, 150, 150) 0%, rgb(0, 213, 213) 100%);
-}
-main .tienda-3 .container .row {
-  position: relative;
-  z-index: 2;
-  margin-top: -100px;
-}
-main .tienda-3 .container .row .col-3 .card-tienda {
-  position: relative;
-  transition: transform 1s ease;
-}
-main .tienda-3 .container .row .col-3 .card-tienda:hover {
-  transform: scale(1.03);
-  cursor: pointer;
-}
-main .tienda-3 .container .row .col-3 .card-tienda img {
+main .modal {
+  display: none;
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-main .tienda-3 .container .row .col-3 .card-tienda p {
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  position: absolute;
-  top: 10px;
-  left: 5px;
-  z-index: 2;
 }
-main .tienda-3 .container .row .col-3 .card-tienda h5 {
+main .modal .modal-content {
+  background-color: #535353;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #8f1818;
+  width: 80%;
+  max-width: 500px;
+}
+main .modal .modal-content .modal-header {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+main .modal .modal-content .modal-header .modal-close {
+  cursor: pointer;
+  color: #ffffff;
+}
+main .modal .modal-content .modal-header .modal-close:hover {
+  color: rgb(201, 30, 30);
+  text-decoration: none;
+}
+main .modal .modal-content .modal-header .modal-close:focus {
+  color: rgb(201, 30, 30);
+  text-decoration: none;
+}
+main .modal .modal-content .modal-body {
+  margin-bottom: 20px;
+  text-align: center;
+}
+main .modal .modal-content .modal-body #modal-product-name {
+  text-align: center;
+  font-size: 20px;
+}
+main .modal .modal-content .modal-body #modal-price {
+  text-align: center;
+  font-size: 18px;
+}
+main .modal .modal-content .modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+main .modal .modal-content .modal-footer .btn {
+  font-size: 14px;
+  cursor: pointer;
+}
+main .modal .modal-content .modal-footer .btn-secondary {
+  padding: 10px 10px;
+  background-color: #a22d25;
   color: white;
-  position: absolute;
-  bottom: 10px;
-  left: 15px;
-  font-size: 17px;
-  z-index: 2;
+}
+main .modal .modal-content .modal-footer .btn-secondary:hover {
+  background-color: #bd291e;
+}
+main .modal .modal-content .modal-footer .btn-primary {
+  padding: 10px 12px;
+  background-color: #358137;
+  color: white;
+}
+main .modal .modal-content .modal-footer .btn-primary:hover {
+  background-color: #359839;
+}
+main .section {
+  display: none;
 }
 
 /*# sourceMappingURL=estilos.css.map */

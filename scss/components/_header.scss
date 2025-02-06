@@ -15,6 +15,7 @@ header{
         margin: 10px 0;
     .nav-item{
         margin: 0 10px;
+        cursor: pointer;
         .nav-link{
             display: inline-block;
             padding: 8px;
@@ -32,6 +33,25 @@ header{
                 border-color: rgb(255, 255, 255);
                 box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
                 transform: translateY(-3px);
+            }
+        }
+        #carrito{
+            display: inline-block;
+            position: relative;
+            text-decoration: none;
+            color: rgb(253, 253, 253);
+            margin-right: 20px; /* Para separar el número del enlace */
+            .cantidad {
+                position: absolute;
+                top: -15px;    /* Ajusta el número para que quede por encima del enlace */
+                right: -15px;  /* Ajusta el número para que quede fuera del borde */
+                background-color: red;
+                color: white;
+                padding: 8px;
+                border-radius: 100%;
+                border-color: white;
+                font-size: 14px;
+                font-weight: bold;
             }
         }
         .tienda{
