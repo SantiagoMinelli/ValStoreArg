@@ -14,9 +14,6 @@
     <!-- Icono Pestaña -->
     <link rel="shortcut icon" href="./img/icono-pestaña.png" />
     
-    <!-- Animaciones -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
     <title>ValStore ARG</title>
     </head>
     <body>
@@ -429,15 +426,18 @@
 
             <!-- Carrito -->
             <section id="carrito" class="carrito section">
-
+                <h2>CARRITO</h2>
+                <div id="product-grid" class="product-grid">
+                    <!-- Aquí se llenarán los productos dinámicamente -->
+                </div>
             </section>
             
-            <!-- Modal personalizado -->
-            <div id="confirmationModal" class="modal">
+            <!-- Modal Confirmacion Agregar Producto -->
+            <div id="confirmationModalAdd" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5>Confirmación de añadir producto</h5>
-                        <span class="modal-close" onclick="closeModal()">&times;</span>
+                        <span class="modal-close" onclick="closeModalAdd()">&times;</span>
                     </div>
                     <div class="modal-body">
                         ¿Está seguro que deseas agregar este producto al carrito?
@@ -447,12 +447,34 @@
                         <span id="modal-price"></span>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" onclick="closeModal()">X</button>
+                        <button class="btn btn-secondary" onclick="closeModalAdd()">Cancelar</button>
                         <button class="btn btn-primary" id="confirmAdd">Aceptar</button>
                     </div>
                 </div>
             </div>
+
+            <!-- Modal Confirmación Eliminar Producto -->
+            <div id="confirmationModalRemove" class="modal-eliminar">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Confirmación de eliminar producto</h5>
+                        <span class="modal-close" onclick="closeModalRemove()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro que desea eliminar este producto del carrito?
+                        <br><br>
+                        <strong id="modal-product-name"></strong>
+                        <br>
+                        <span id="modal-price"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="closeModalRemove()">Cancelar</button>
+                        <button class="btn btn-danger" id="confirmRemove">Eliminar</button>
+                    </div>
+                </div>
+            </div>
         </main>
+
         <!-- App JS -->
         <script src="./js/app.js"></script>
     </body>
