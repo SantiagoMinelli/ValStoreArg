@@ -298,11 +298,11 @@ main .tienda .container .row .col-3 .card-tienda h3 {
 }
 main .ofertas {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(245, 246, 252, 0) 50%, rgb(0, 0, 0) 100%), url(../img/ofertas.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top;
+  background-position: center;
   padding-bottom: 120px;
   padding-top: 50px;
 }
@@ -349,7 +349,7 @@ main .ofertas .container .row .col-3 .card-tienda h3 {
 }
 main .carrito {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(245, 246, 252, 0) 50%, rgb(0, 0, 0) 100%), url(../img/ofertas.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -609,6 +609,53 @@ main .mod-compra .modal-content .modal-footer .btn-secondary {
   color: white;
 }
 main .mod-compra .modal-content .modal-footer .btn-secondary:hover {
+  background-color: #c61c1c;
+}
+main .form-compra {
+  display: none;
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+main .form-compra .modal-content {
+  background-color: #535353;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #8f1818;
+  width: 80%;
+  max-width: 500px;
+}
+main .form-compra .modal-content .form label {
+  padding: 10px;
+}
+main .form-compra .modal-content .form input {
+  background-color: rgba(126, 126, 126, 0.4039215686);
+}
+main .form-compra .modal-content .form #buy {
+  padding: 10px 10px;
+  background-color: #48a225;
+  color: white;
+}
+main .form-compra .modal-content .form #buy:hover {
+  background-color: #6bbd1e;
+}
+main .form-compra .modal-content .form #buy:disabled {
+  background-color: #6c757d; /* Gris */
+  color: #ccc;
+  cursor: not-allowed;
+}
+main .form-compra .modal-content .form #closePaymentForm {
+  padding: 10px 10px;
+  background-color: #a22525;
+  color: white;
+}
+main .form-compra .modal-content .form #closePaymentForm:hover {
   background-color: #c61c1c;
 }
 main .cart-total {
