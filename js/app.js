@@ -3,7 +3,7 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Función para mostrar el carrito al cargar la página
 document.addEventListener("DOMContentLoaded", function() {
-    displayCart();  // Muestra el carrito cuando se carga la página
+    displayCart();  
 });
 
 // Función para agregar el producto al carrito
@@ -30,40 +30,81 @@ function addToCart(productName, price) {
     console.log(cart);
 }
 
-// Función para mostrar los productos en la grilla
+// Función para mostrar los productos en la tabla
 function displayCart() {
     var grid = document.getElementById('product-grid');
-    grid.innerHTML = '';  // Limpiar la grilla antes de agregar los nuevos productos
+    grid.innerHTML = '';  // Limpiar la tabla antes de agregar los nuevos productos
 
     if (cart.length === 0) {
-        grid.innerHTML = '<p>No tienes productos en el carrito.</p>';
+        grid.innerHTML = '<h2>No tienes productos en el carrito.</h2>';
     } else {
-        cart.forEach(function(product, index) {
-            var productCard = document.createElement('div');
-            productCard.classList.add('product-card');
+        var total = 0; // Variable para acumular el total de la compra
 
-            // Crear el título y el precio del producto
+        // Crear el encabezado de la tabla
+        var table = document.createElement('table');
+        table.classList.add('cart-table');
+
+        // Encabezado
+        var headerRow = document.createElement('tr');
+        var headers = ['Producto', 'Precio', 'Acción'];
+        headers.forEach(function(headerText) {
+            var th = document.createElement('th');
+            th.textContent = headerText;
+            headerRow.appendChild(th);
+        });
+        table.appendChild(headerRow);
+
+        // Agregar los productos a la tabla
+        cart.forEach(function(product, index) {
+            var row = document.createElement('tr');
+
+            // Columna para el nombre del producto
+            var productNameCell = document.createElement('td');
             var productName = document.createElement('h3');
             productName.textContent = product.name;
+            productNameCell.appendChild(productName);
 
+            // Columna para el precio del producto
+            var productPriceCell = document.createElement('td');
             var productPrice = document.createElement('p');
             productPrice.textContent = '$' + product.price;
+            productPriceCell.appendChild(productPrice);
 
-            // Crear el botón de eliminar
+            // Columna para la acción (botón eliminar)
+            var actionCell = document.createElement('td');
             var removeButton = document.createElement('button');
-            removeButton.textContent = 'Eliminar';
+            removeButton.textContent = 'Quitar';
             removeButton.classList.add('btn-remove');
             removeButton.addEventListener('click', function() {
                 openModal(product, index);  // Abrir el modal de confirmación
             });
+            actionCell.appendChild(removeButton);
 
-            // Agregar los elementos al producto
-            productCard.appendChild(productName);
-            productCard.appendChild(productPrice);
-            productCard.appendChild(removeButton);
+            // Agregar la fila a la tabla
+            row.appendChild(productNameCell);
+            row.appendChild(productPriceCell);
+            row.appendChild(actionCell);
+            table.appendChild(row);
 
-            // Agregar la tarjeta a la grilla
-            grid.appendChild(productCard);
+            // Acumular el precio total
+            total += parseFloat(product.price);
+        });
+
+        // Agregar la tabla al grid
+        grid.appendChild(table);
+
+        // Agregar el total y el botón de compra
+        var totalRow = document.createElement('div');
+        totalRow.classList.add('cart-total');
+        totalRow.innerHTML = `
+            <p>Total: $${total.toFixed(2)}</p>
+            <button id="buyButton" class="btn-buy">Comprar</button>
+        `;
+        grid.appendChild(totalRow);
+
+        // Agregar el evento para la compra
+        document.getElementById('buyButton').addEventListener('click', function() {
+            openPurchaseModal(); // Mostrar modal de compra exitosa
         });
     }
 }
@@ -74,8 +115,8 @@ function openModal(product, index) {
     productToRemove = { product, index };  // Guardamos el producto y su índice
 
     // Mostrar los detalles en el modal
-    document.getElementById('modal-product-name').textContent = product.name;
-    document.getElementById('modal-price').textContent = '$' + product.price;
+    document.getElementById('modal-product-name-remove').textContent = product.name;
+    document.getElementById('modal-price-remove').textContent = '$' + product.price;
 
     // Mostrar el modal
     document.getElementById('confirmationModalRemove').style.display = "block";
@@ -106,7 +147,7 @@ function closeModalRemove() {
     document.getElementById('confirmationModalRemove').style.display = "none";
 }
 
-// Función para mostrar el modal con la información del producto
+// Función para mostrar el modal con la confirmación del producto
 function confirmAddToCart(cardElement) {
     // Obtener los detalles del producto
     var productName = cardElement.querySelector('h2').textContent + " " + cardElement.querySelector('h3').textContent;
@@ -139,19 +180,13 @@ function showSection(section) {
 
     // Mostrar secciones específicas para 'tienda'
     if (section === 'tienda') {
-        const sectionsToShow = ['tienda', 'tienda-2', 'tienda-3', 'tienda-4', 'carrito'];
+        const sectionsToShow = ['tienda', 'tienda-2', 'tienda-3', 'tienda-4'];
         sectionsToShow.forEach(sectionId => {
             const activeSection = document.getElementById(sectionId);
             if (activeSection) {
                 activeSection.style.display = 'block';
             }
         });
-    } else if (section === 'carrito') {
-        // Asegurarse de que la sección del carrito se muestre correctamente
-        const activeSection = document.getElementById('carrito');
-        if (activeSection) {
-            activeSection.style.display = 'block';
-        }
     } else {
         // Mostrar solo la sección seleccionada
         const activeSection = document.getElementById(section);
@@ -161,9 +196,32 @@ function showSection(section) {
     }
 }
 
+// Función para abrir el modal de compra exitosa
+function openPurchaseModal() {
+    document.getElementById('purchaseModal').style.display = "block";  // Mostrar el modal de compra exitosa
+}
+
+
+
+// Función para cerrar el modal de compra exitosa
+document.getElementById('closePurchaseModal').addEventListener('click', function() {
+    document.getElementById('purchaseModal').style.display = "none";  // Cerrar el modal
+    cart = [];  // Vaciar el carrito
+    localStorage.setItem('cart', JSON.stringify(cart));  // Guardar el carrito vacío
+    displayCart();  // Actualizar la vista
+});
+
+// Función para cerrar el modal de compra
+function closeModalBuy() {
+    document.getElementById('purchaseModal').style.display = "none";
+    cart = [];  // Vaciar el carrito
+    localStorage.setItem('cart', JSON.stringify(cart));  // Guardar el carrito vacío
+    displayCart();  // Actualizar la vista
+}
+
 // Mostrar varias secciones al cargar la página
 window.onload = function() {
-    const sectionsToShow = ['tienda', 'tienda-2', 'tienda-3', 'tienda-4', 'carrito'];
+    const sectionsToShow = ['tienda', 'tienda-2', 'tienda-3', 'tienda-4'];
     sectionsToShow.forEach(section => {
         const activeSection = document.getElementById(section);
         if (activeSection) {
