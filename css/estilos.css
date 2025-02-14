@@ -646,7 +646,7 @@ main .form-compra .modal-content .form #buy:hover {
   background-color: #6bbd1e;
 }
 main .form-compra .modal-content .form #buy:disabled {
-  background-color: #6c757d; /* Gris */
+  background-color: #6c757d;
   color: #ccc;
   cursor: not-allowed;
 }
@@ -670,5 +670,25 @@ main .cart-total p {
 main .section {
   display: none;
 }
+
+footer {
+  background: #000000;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+footer p {
+  color: white;
+}
+
+/*--------------- MEDIA QUERY ---------------*/
+/* 
+320px–480px: Dispositivos móviles
+481px–768px: iPads y tablets
+769px–1024px: Pantallas pequeñas y portátiles
+1025px–1200px: Computadoras de escritorio y pantallas grandes
+*/
 
 /*# sourceMappingURL=estilos.css.map */

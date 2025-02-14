@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// Calcular el año para el footer
+document.getElementById("year").textContent = new Date().getFullYear();
+
 // -------------------- Función para validar tarjeta --------------------
 function validateCardNumber(cardNumber) {
     let sum = 0;
