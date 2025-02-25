@@ -1,17 +1,27 @@
 // -------------------- Inicialización --------------------
 
-// Array Productos en el carrito
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+// Array Carrito 
+let carrito = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Mostrar el carrito al cargar la página
 document.addEventListener("DOMContentLoaded", function() {
     displayCart();
-    // Actualizar la cantidad en el enlace
+    // Actualizar la cantidad de productos en el anlace
     const cantidadElement = document.getElementById('cantidad-productos');
     if (cantidadElement) {
-        cantidadElement.textContent = cart.length;
+        cantidadElement.textContent = carrito.length;
     }
+
+    console.log(carrito);
 });
+
+// Clase Producto
+class Producto {
+    constructor(name, price) {
+        this.name = name;
+        this.price = price;
+    }
+}
 
 // Calcular el año para el footer
 document.getElementById("year").textContent = new Date().getFullYear();
@@ -28,15 +38,16 @@ function validateCardNumber(cardNumber) {
         if (shouldDouble) {
             digit *= 2;
             if (digit > 9) {
-                digit -= 9;  // Si el doble es mayor que 9, restamos 9
+                digit -= 9; 
             }
         }
 
         sum += digit;
-        shouldDouble = !shouldDouble; // Alternar entre duplicar y no duplicar
+        shouldDouble = !shouldDouble;
     }
 
-    return sum % 10 === 0;  // Si la suma es divisible por 10, la tarjeta es válida
+    // Si la suma es divisible por 10, la tarjeta es válida
+    return sum % 10 === 0;  
 }
 
 
@@ -64,18 +75,18 @@ if (closePaymentForm) {
     closePaymentForm.addEventListener('click', function() {
         const paymentForm = document.getElementById('paymentForm');
         if (paymentForm) {
-            paymentForm.style.display = "none";  // Ocultar el formulario de pago
+            paymentForm.style.display = "none"; 
         }
     });
 };
 
-// Cerrar el formulario de pago al hacer clic en el botón closePaymentFormUp
+// Cerrar el formulario de pago al hacer clic en la X
 const closePaymentFormUp = document.getElementById('closePaymentFormUp');
 if (closePaymentFormUp) {
     closePaymentFormUp.addEventListener('click', function() {
         const paymentFormModal = document.getElementById('paymentForm');
         if (paymentFormModal) {
-            paymentFormModal.style.display = "none";  // Cerrar el formulario de pago
+            paymentFormModal.style.display = "none";
         }
     });
 }
@@ -95,13 +106,13 @@ if (paymentForm) {
         // Validar tarjeta con el algoritmo de Luhn
         if (!validateCardNumber(cardNumber)) {
             alert("Número de tarjeta inválido.");
-            return; // No continuar si el número de tarjeta es inválido
+            return; 
         }
 
         // Verificar si todos los campos están completos
         if (cardName === "" || expiryDate === "" || cvv === "" || dni === "") {
             alert("Por favor, complete todos los campos.");
-            return; // No continuar si falta algún campo
+            return; 
         }
 
         // Si todos los campos están completos y la tarjeta es válida, proceder con la compra
@@ -109,21 +120,19 @@ if (paymentForm) {
         // Ocultar el formulario de pago
         const paymentFormModal = document.getElementById('paymentForm');
         if (paymentFormModal) {
-            paymentFormModal.style.display = "none";  // Ocultar el formulario de pago
+            paymentFormModal.style.display = "none";
         }
 
         // Vaciar el carrito
-        cart = [];
-        localStorage.setItem('cart', JSON.stringify(cart));
-        displayCart();  // Actualizar la vista del carrito
-
+        carrito = [];
+        localStorage.setItem('cart', JSON.stringify(carrito));
+        displayCart();  
         // Mostrar el modal de compra exitosa
-        openPurchaseModal();  // Ahora se abre el modal de compra exitosa
+        openPurchaseModal();
     });
 }
 
 // -------------------- Funciones para verificar si todos los campos están completos --------------------
-
 // Verificar todos los campos
 const formInputs = document.querySelectorAll('#payment-form input');
 const submitButton = document.getElementById('buy');
@@ -137,7 +146,7 @@ function checkFormCompletion() {
         }
     });
 
-    // Además de los campos completos, verificamos si la tarjeta es válida
+    // Validar con la funcion la tarjeta y si están completos los campos
     let cardNumber = document.getElementById('card-number').value.trim();
     let isCardValid = validateCardNumber(cardNumber);
 
@@ -145,59 +154,56 @@ function checkFormCompletion() {
     submitButton.disabled = !allFilled || !isCardValid; 
 }
 
-// Agregar evento a cada campo para verificar cuando se escriba en ellos
+// Agregar evento a cada campo para verificar cuando se escriba 
 formInputs.forEach(input => {
-    input.addEventListener('input', checkFormCompletion); // Verificar cada campo cuando se escribe
+    input.addEventListener('input', checkFormCompletion);
 });
 
 // -------------------- Funciones del Carrito --------------------
-
 // Agregar un producto
 function addToCart(productName, price) {
-    // Crear un objeto de producto
-    var product = {
-        name: productName,
-        price: price
-    };
+    // Crear una instancia de la clase Producto
+    var product = new Producto(productName, price);
 
     // Agregar el producto al carrito (array)
-    cart.push(product);
+    carrito.push(product);
 
     // Actualizar la cantidad en el enlace
     const cantidadElement = document.getElementById('cantidad-productos');
     if (cantidadElement) {
-        cantidadElement.textContent = cart.length;
+        cantidadElement.textContent = carrito.length;
     }
 
     // Actualizar la grilla de productos
     displayCart();
 
     // Guardar el nuevo carrito en localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(carrito));
 
     // Ver el contenido del carrito en la consola
-    console.log(cart);
+    console.log(carrito);
 }
 
 // Mostrar los productos en la tabla
 function displayCart() {
     var grid = document.getElementById('product-grid');
-    if (!grid) return; // Asegurarse de que el grid exista
+    // Asegurarse de que el grid exista para continuar
+    if (!grid) return; 
 
     // Iniciarla vacía por defecto
     grid.innerHTML = '';
 
-    if (cart.length === 0) {
+    if (carrito.length === 0) {
         grid.innerHTML = '<h2>No tienes productos en el carrito.</h2>';
     } else {
-        // Variable total de la compra
+        // Variable total
         var total = 0;
 
-        // Crear el encabezado de la tabla
+        // Crear el encabezado
         var table = document.createElement('table');
         table.classList.add('cart-table');
 
-        // Encabezado
+        // Cargar encabezado
         var headerRow = document.createElement('tr');
         var headers = ['Producto', 'Precio', 'Acción'];
         headers.forEach(function(headerText) {
@@ -208,7 +214,7 @@ function displayCart() {
         table.appendChild(headerRow);
 
         // Agregar los productos a la tabla
-        cart.forEach(function(product, index) {
+        carrito.forEach(function(product, index) {
             var row = document.createElement('tr');
 
             // Columna Producto
@@ -233,7 +239,7 @@ function displayCart() {
             });
             actionCell.appendChild(removeButton);
 
-            // Agregar la fila a la tabla
+            // Agregar los productos a la tabla
             row.appendChild(productNameCell);
             row.appendChild(productPriceCell);
             row.appendChild(actionCell);
@@ -271,11 +277,9 @@ function openModal(product, index) {
     // Se almacena el producto con su indice para identificarlo
     productToRemove = { product, index };
 
-    // Mostrar los detalles en el modal
+    // Mostrar los detalles del producto a eliminar en el modal
     document.getElementById('modal-product-name-remove').textContent = product.name;
     document.getElementById('modal-price-remove').textContent = '$' + product.price;
-
-    // Mostrar el modal
     const confirmationModalRemove = document.getElementById('confirmationModalRemove');
     if (confirmationModalRemove) {
         confirmationModalRemove.style.display = "block";
@@ -288,19 +292,22 @@ if (confirmRemove) {
     confirmRemove.addEventListener('click', function() {
         if (productToRemove) {
             // Eliminar el producto del array
-            cart.splice(productToRemove.index, 1);
+            carrito.splice(productToRemove.index, 1);
 
             // Actualizar la cantidad en el enlace
             const cantidadElement = document.getElementById('cantidad-productos');
             if (cantidadElement) {
-                cantidadElement.textContent = cart.length;
+                cantidadElement.textContent = carrito.length;
             }
 
             // Actualizar la grilla
             displayCart();
 
             // Guardar el nuevo carrito en localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('cart', JSON.stringify(carrito));
+
+            // Mostrar el carrito actualizado en la consola
+            console.log(carrito);
         }
         closeModalRemove();
     });
@@ -366,13 +373,20 @@ if (closePurchaseModal) {
         if (purchaseModal) {
             purchaseModal.style.display = "none";  // Cerrar el modal de compra exitosa
         }
-        cart = [];  // Vaciar el carrito
-        localStorage.setItem('cart', JSON.stringify(cart));  // Guardar el carrito vacío
+
+        // Después de la compra vaciar el carrito
+        cart = [];  
+        localStorage.setItem('cart', JSON.stringify(carrito));
         const cantidadElement = document.getElementById('cantidad-productos');
         if (cantidadElement) {
-            cantidadElement.textContent = cart.length;  // Actualizar la cantidad de productos
+            cantidadElement.textContent = carrito.length; 
         }
-        displayCart();  // Actualizar la vista
+
+        // Actualizar el carrito
+        displayCart();  
+
+        // Mostrar el nuevo carrito en consola
+        console.log(carrito);
     });
 }
 

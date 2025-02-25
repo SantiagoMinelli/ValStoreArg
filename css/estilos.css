@@ -276,8 +276,9 @@ main .tienda .container .row .col-3 .card-tienda img {
 main .tienda .container .row .col-3 .card-tienda p {
   color: white;
   position: absolute;
-  top: 10px;
-  left: 5px;
+  top: 2px;
+  left: 6px;
+  font-size: 20px;
   z-index: 2;
 }
 main .tienda .container .row .col-3 .card-tienda h2 {
