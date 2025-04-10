@@ -2,22 +2,22 @@
 // Array Carrito
 let carrito = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Mostrar el carrito al cargar la página
-document.addEventListener("DOMContentLoaded", function() {
-    displayCart();
+document.addEventListener("DOMContentLoaded", () => {
+    displayCart();       
     updateProductCount();
     console.log(carrito);
+    document.getElementById("year").textContent = new Date().getFullYear(); // Footer
 });
 
-// Actualizar la cantidad de productos
-function updateProductCount() {
+// -------------------- Actualizar cantidad de productos --------------------
+const updateProductCount = () => {
     const cantidadElement = document.getElementById('cantidad-productos');
     if (cantidadElement) {
         cantidadElement.textContent = carrito.length;
     }
-}
+};
 
-// Clase Producto
+// -------------------- Clase Producto --------------------
 class Producto {
     constructor(name, price) {
         this.name = name;
@@ -25,95 +25,94 @@ class Producto {
     }
 }
 
-// Calcular el año para el footer
-document.getElementById("year").textContent = new Date().getFullYear();
-
-// -------------------- Función para validar tarjeta --------------------
-function validateCardNumber(cardNumber) {
+// -------------------- Validación de tarjeta --------------------
+const validateCardNumber = (cardNumber) => {
     let sum = 0;
     let shouldDouble = false;
-
-    // Recorremos el número de tarjeta de derecha a izquierda
     for (let i = cardNumber.length - 1; i >= 0; i--) {
         let digit = parseInt(cardNumber.charAt(i));
         if (shouldDouble) {
             digit *= 2;
-            if (digit > 9) digit -= 9; 
+            if (digit > 9) digit -= 9;
         }
         sum += digit;
         shouldDouble = !shouldDouble;
     }
-
-    return sum % 10 === 0;  
-}
+    return sum % 10 === 0;
+};
 
 // -------------------- Funciones de Pago --------------------
-
-// Mostrar el formulario de pago al hacer clic en "Comprar ahora"
-document.getElementById('buyButton')?.addEventListener('click', openPaymentForm);
-
-// Abrir el Formulario de Pago
-function openPaymentForm() {
-    toggleModal('paymentForm', true);
-}
-
-// Cerrar el formulario de pago sin realizar la compra
+const openPaymentForm = () => toggleModal('paymentForm', true);
 document.getElementById('closePaymentForm')?.addEventListener('click', () => toggleModal('paymentForm', false));
-
-// Cerrar el formulario de pago al hacer clic en la X
 document.getElementById('closePaymentFormUp')?.addEventListener('click', () => toggleModal('paymentForm', false));
 
-// Formulario de pago (hacer la compra)
-document.getElementById('payment-form')?.addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    let cardNumber = document.getElementById('card-number').value.trim();
-    let cardName = document.getElementById('card-name').value.trim();
-    let expiryDate = document.getElementById('expiry-date').value.trim();
-    let cvv = document.getElementById('cvv').value.trim();
-    let dni = document.getElementById('dni').value.trim();
+document.getElementById('payment-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const cardNumber = document.getElementById('card-number').value.trim();
+    const cardName = document.getElementById('card-name').value.trim();
+    const expiryDate = document.getElementById('expiry-date').value.trim();
+    const cvv = document.getElementById('cvv').value.trim();
+    const dni = document.getElementById('dni').value.trim();
 
     if (!validateCardNumber(cardNumber)) {
         alert("Número de tarjeta inválido.");
         return;
     }
 
-    if ([cardName, expiryDate, cvv, dni].includes("")) {
+    if ([cardName, expiryDate, cvv, dni].some(val => val === '')) {
         alert("Por favor, complete todos los campos.");
         return;
     }
 
-    // Proceder con la compra
-    toggleModal('paymentForm', false);
     carrito = [];
     localStorage.setItem('cart', JSON.stringify(carrito));
+    toggleModal('paymentForm', false);
     displayCart();
     updateProductCount();
-    openPurchaseModal();
+
+    // -------------------- Finalizar compra --------------------
+    Swal.fire({
+        title: "¡Compra realizada con éxito!",
+        text: "Muchas gracias por comprar con ValStore ARG",
+        icon: "success",
+        showClass: {
+        popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+        `
+        },
+        hideClass: {
+        popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+        `
+        },
+        showConfirmButton: false,
+        timer: 3500
+    });
+
+    window.onload = () => {
+        showSections(['tienda', 'tienda-2', 'tienda-3', 'tienda-4']);
+    };
 });
 
-// -------------------- Funciones para verificar si todos los campos están completos --------------------
-document.querySelectorAll('#payment-form input').forEach(input => input.addEventListener('input', checkFormCompletion));
+// Validación de que los campos estén completos
+document.querySelectorAll('#payment-form input').forEach(input => 
+    input.addEventListener('input', () => checkFormCompletion())
+);
 
-function checkFormCompletion() {
-    const allFilled = [...document.querySelectorAll('#payment-form input')].every(input => input.value.trim() !== '');
+const checkFormCompletion = () => {
+    const inputs = [...document.querySelectorAll('#payment-form input')];
+    const allFilled = inputs.every(input => input.value.trim() !== '');
     const cardNumber = document.getElementById('card-number').value.trim();
     const isCardValid = validateCardNumber(cardNumber);
-    
     document.getElementById('buy').disabled = !(allFilled && isCardValid);
-}
+};
 
-// -------------------- Funciones del Carrito --------------------
-// Agregar un producto
-function addToCart(productName, price) {
-    const product = new Producto(productName, price);
-    carrito.push(product);
-    updateProductCount();
-    displayCart();
-    localStorage.setItem('cart', JSON.stringify(carrito));
-}
-
-// Mostrar los productos en la tabla
+// -------------------- Mostrar productos en el carrito --------------------
 function displayCart() {
     var grid = document.getElementById('product-grid');
     // Asegurarse de que el grid exista para continuar
@@ -200,124 +199,112 @@ function displayCart() {
     }
 }
 
-// Eliminar el producto del carrito
+// -------------------- Eliminar producto --------------------
 let productToRemove = null;
-function openModal(product, index) {
-    // Se almacena el producto con su indice para identificarlo
-    productToRemove = { product, index };
 
-    // Mostrar los detalles del producto a eliminar en el modal
+const openModal = (product, index) => {
+    productToRemove = { product, index };
     document.getElementById('modal-product-name-remove').textContent = product.name;
     document.getElementById('modal-price-remove').textContent = '$' + product.price;
     toggleModal('confirmationModalRemove', true);
-}
+};
 
-// Confirmar la eliminación
-const confirmRemove = document.getElementById('confirmRemove');
-if (confirmRemove) {
-    confirmRemove.addEventListener('click', function() {
-        if (productToRemove) {
-            // Eliminar el producto del array
-            carrito.splice(productToRemove.index, 1);
+document.getElementById('confirmRemove')?.addEventListener('click', () => {
+    if (productToRemove) {
+        carrito.splice(productToRemove.index, 1);
+        updateProductCount();
+        displayCart();
+        localStorage.setItem('cart', JSON.stringify(carrito));
+    }
+    closeModalRemove();
+    Toastify({
+        text: "¡Se eliminó correctamente el producto!",
+        className: "info",
+        style: {
+            background: "linear-gradient(to right,rgb(176, 0, 0),rgb(201, 61, 61))",
+            fontWeight: "bold",
+        },
+        offset: {
+            x: 50,
+            y: 10,
+        },
+    }).showToast();
+});
 
-            // Actualizar la cantidad en el enlace
-            const cantidadElement = document.getElementById('cantidad-productos');
-            if (cantidadElement) {
-                cantidadElement.textContent = carrito.length;
-            }
-            displayCart();
-            localStorage.setItem('cart', JSON.stringify(carrito));
-            console.log(carrito);
-        }
-        closeModalRemove();
-    });
-}
+const closeModalRemove = () => toggleModal('confirmationModalRemove', false);
 
-// Cerrar el modal de eliminación
-function closeModalRemove() {
-    toggleModal('confirmationModalRemove', false);
-}
+// -------------------- Agregar producto --------------------
+const addToCart = (productName, price) => {
+    const product = new Producto(productName, price);
+    carrito.push(product);
+    updateProductCount();
+    displayCart();
+    localStorage.setItem('cart', JSON.stringify(carrito));
+};
 
-// Mostrar el modal para agregar el producto
-function confirmAddToCart(cardElement) {
-    // Obtener los detalles del producto
-    let productName = cardElement.querySelector('h2').textContent + " " + cardElement.querySelector('h3').textContent;
-    let price = cardElement.querySelector('.precio').textContent;
+// -------------------- Confirmación al agregar --------------------
+const confirmAddToCart = (cardElement) => {
+    const productName = cardElement.querySelector('h2').textContent + " " + cardElement.querySelector('h3').textContent;
+    const price = cardElement.querySelector('.precio').textContent;
 
-    // Mostrar la información en el modal
     document.getElementById('modal-product-name').textContent = productName;
     document.getElementById('modal-price').textContent = price;
 
-    // Mostrar el modal de confirmación de agregar producto
     toggleModal('confirmationModalAdd', true);
 
-    // Agregar el producto al confirmar
     const confirmAdd = document.getElementById('confirmAdd');
     if (confirmAdd) {
-        confirmAdd.onclick = function() {
+        confirmAdd.onclick = () => {
             addToCart(productName, price);
             closeModalAdd();
-            console.log(carrito);
+            Toastify({
+                text: "¡Se añadió correctamente el producto!",
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right,rgb(176, 0, 0),rgb(201, 61, 61))",
+                    fontWeight: "bold",
+                },
+                offset: {
+                    x: 50,
+                    y: 10,
+                },
+            }).showToast();
         };
     }
-}
+};
 
-// Cerrar el modal de agregar producto
-function closeModalAdd() {
-    toggleModal('confirmationModalAdd', false);
-}
-
-// -------------------- Funciones de Finalización de Compra --------------------
-
-function openPurchaseModal() {
-    toggleModal('purchaseModal', true);
-}
-
-document.getElementById('closePurchaseModal')?.addEventListener('click', function() {
-    toggleModal('purchaseModal', false);
-    carrito = [];
-    localStorage.setItem('cart', JSON.stringify(carrito));
-    displayCart();
-});
+const closeModalAdd = () => toggleModal('confirmationModalAdd', false);
 
 // -------------------- Funciones Visuales Adicionales --------------------
 // Toggle para mostrar u ocultar modales
-function toggleModal(modalId, show) {
+const toggleModal = (modalId, show) => {
     const modal = document.getElementById(modalId);
     if (modal) {
         modal.style.display = show ? 'block' : 'none';
     }
-}
+};
 
 // Función para mostrar secciones específicas
-function showSections(sectionsToShow) {
-    // Ocultar todas las secciones
-    const allSections = document.querySelectorAll('.section');
-    allSections.forEach(sec => sec.style.display = 'none');
-    sectionsToShow.forEach(sectionId => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-            section.style.display = 'block';
-        }
+const showSections = (sectionsToShow) => {
+    document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+    sectionsToShow.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'block';
     });
-}
+};
 
 // Mostrar solo las tiendas al iniciar
-window.onload = function() {
+window.onload = () => {
     showSections(['tienda', 'tienda-2', 'tienda-3', 'tienda-4']);
 };
 
 // Mostrar solo la sección especificada
-function showSection(section) {
-    showSections([section]);
-}
+const showSection = (section) => showSections([section]);
 
 // Animación del contenido de la tarjeta (Mercado Nocturno)
-function revealContent(cardElement) {
-    const cardInner = cardElement.querySelector('.card-inner');
-
-    // Asegurarse de que solo se haga una vez
-    if (cardInner && !cardInner.classList.contains('revealed')) {
-        cardInner.classList.add('revealed');
+const revealContent = (cardElement) => {
+    const inner = cardElement.querySelector('.card-inner');
+    if (inner && !inner.classList.contains('revealed')) {
+        inner.classList.add('revealed');
     }
-}
+};

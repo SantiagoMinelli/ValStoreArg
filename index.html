@@ -10,6 +10,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="./css/estilos.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <!-- Icono Pestaña -->
     <link rel="shortcut icon" href="./img/icono-pestaña.png" />
@@ -24,7 +25,7 @@
                     <a class="nav-link" onclick="showSection('oferta')">Ofertas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link tienda" aria-current="page" onclick="showSection('tienda')">Tienda</a>
+                    <a class="nav-link tienda" aria-current="page" onclick="showSections(['tienda', 'tienda-2', 'tienda-3', 'tienda-4'])">Tienda</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="carrito-cuenta" onclick="showSection('carrito')">
@@ -512,22 +513,6 @@
                     </form>
                 </div>
             </div>
-
-            <!-- Modal de compra exitosa -->
-            <div id="purchaseModal" class="modal mod-compra">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5>¡Compra realizada con éxito!</h5>
-                        <span class="modal-close">&times;</span>
-                    </div>
-                    <div class="modal-body">
-                        <p>Muchas gracias por comprar con ValStore ARG</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="closePurchaseModal" class="btn btn-secondary">Cerrar</button>
-                    </div>
-                </div>
-            </div>
         </main>
 
         <footer>
@@ -535,5 +520,7 @@
         </footer>
         <!-- App JS -->
         <script src="./js/app.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 </html>

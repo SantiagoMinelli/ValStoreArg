@@ -212,12 +212,11 @@ main{
     //* OFERTAS
     .ofertas{
         width: 100%;
-        height: 100vh;
+        min-height: 100vh;
         background-image: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(245,246,252,0) 50%, rgba(0,0,0,1) 100%),url(../img/ofertas.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        padding-bottom: 120px;
         padding-top: 50px;
         .container{
             .row{
@@ -269,12 +268,12 @@ main{
     //* CARRITO
     .carrito{
         width: 100%;
-        height: 100vh;
+        min-height: 100vh;
         background-image: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(245,246,252,0) 50%, rgba(0,0,0,1) 100%),url(../img/ofertas.jpg);
-        background-repeat: no-repeat;
+        background-repeat: repeat;
         background-size: cover;
         background-position: top;
-        padding-bottom: 120px;
+        padding-bottom: 80px;
         padding-top: 30px;
         display: block;
         h2{
@@ -302,19 +301,35 @@ main{
                         }
                         td {
                             background-color: #fff;
+                            &:has(.btn-remove) {
+                                text-align: center;
+                                vertical-align: middle;
+                            }
+                            &:has(p) {
+                                font-size: 20px;
+                                padding-top: 20px;
+                                text-align: center;
+                                vertical-align: middle;
+                            }
                         }
                     }
                     .cart-total {
                         display: flex;
                         justify-content: space-between;
                         margin-top: 20px;
-                        font-size: 1.2em;
+                        font-size: 20px;
+                        p{
+                            font-size: 25px;
+                            padding-top: 20px;
+                            font-family: "Orbitron", serif;
+                        }
                         .btn-buy {
                             background-color: #28a745;
                             color: white;
                             padding: 10px 20px;
                             border: none;
                             cursor: pointer;
+                            font-family: "Orbitron", serif;
                             &:hover {
                                 background-color: #218838;
                             }
@@ -326,6 +341,7 @@ main{
                         padding: 10px;
                         border: none;
                         cursor: pointer;
+                        font-family: "Orbitron", serif;
                         &:hover {
                             background-color: #ed0d0d;
                         }
@@ -350,12 +366,12 @@ main{
         .modal-content {
             background-color: #535353;
             margin: 15% auto;
-            padding: 20px;
+            padding: 10px;
             border: 1px solid #8f1818;
             width: 80%;
             max-width: 500px;
             .modal-header {
-                font-size: 20px;
+                font-size: 25px;
                 margin-bottom: 10px;
                 .modal-close {
                     cursor: pointer;
@@ -375,11 +391,12 @@ main{
                 text-align: center;
                 #modal-product-name{
                     text-align: center;
-                    font-size: 20px;
+                    font-family: "Orbitron", serif;
+                    font-size: 25px;
                 }
                 #modal-price{
                     text-align: center;
-                    font-size: 18px;
+                    font-size: 22px;
                 }
             }
             .modal-footer {
@@ -424,12 +441,12 @@ main{
         .modal-content {
             background-color: #535353;
             margin: 15% auto;
-            padding: 20px;
+            padding: 10px;
             border: 1px solid #8f1818;
             width: 80%;
             max-width: 500px;
             .modal-header {
-                font-size: 20px;
+                font-size: 25px;
                 margin-bottom: 10px;
                 .modal-close {
                     cursor: pointer;
@@ -447,13 +464,14 @@ main{
             .modal-body {
                 margin-bottom: 20px;
                 text-align: center;
-                #modal-product-name{
+                #modal-product-name-remove{
                     text-align: center;
-                    font-size: 20px;
+                    font-family: "Orbitron", serif;
+                    font-size: 25px;
                 }
-                #modal-price{
+                #modal-price-remove{
                     text-align: center;
-                    font-size: 18px;
+                    font-size: 22px;
                 }
             }
             .modal-footer {
@@ -557,17 +575,28 @@ main{
         color: white;
         .modal-content {
             background-color: #535353;
-            margin: 15% auto;
+            margin: 6% auto;
             padding: 20px;
             border: 1px solid #8f1818;
             width: 80%;
             max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto; 
             .form{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
                 label{
-                    padding: 10px;
+                    text-align: left;
+                    margin-bottom: 5px;
+                    font-weight: bold;
                 }
                 input{
-                    background-color: #7e7e7e67;
+                    padding: 8px;
+                    font-size: 14px;
+                    background-color: #ffffffdb;
+                    border: none;
+                    border-radius: 4px;
                 }
                 #buy{
                     padding: 10px 10px;
