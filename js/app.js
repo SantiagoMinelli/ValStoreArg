@@ -2,6 +2,7 @@
 // Array Carrito
 let carrito = JSON.parse(localStorage.getItem('cart')) || [];
 
+// Cargado de la página
 document.addEventListener("DOMContentLoaded", () => {
     displayCart();       
     updateProductCount();
@@ -113,8 +114,8 @@ const checkFormCompletion = () => {
 };
 
 // -------------------- Mostrar productos en el carrito --------------------
-function displayCart() {
-    var grid = document.getElementById('product-grid');
+const displayCart = () => {
+    const grid = document.getElementById('product-grid');
     // Asegurarse de que el grid exista para continuar
     if (!grid) return; 
 
@@ -125,44 +126,44 @@ function displayCart() {
         grid.innerHTML = '<h2>No tienes productos en el carrito.</h2>';
     } else {
         // Variable total
-        var total = 0;
+        let total = 0;
 
         // Crear el encabezado
-        var table = document.createElement('table');
+        const table = document.createElement('table');
         table.classList.add('cart-table');
 
         // Cargar encabezado
-        var headerRow = document.createElement('tr');
-        var headers = ['Producto', 'Precio', 'Acción'];
-        headers.forEach(function(headerText) {
-            var th = document.createElement('th');
+        const headerRow = document.createElement('tr');
+        const headers = ['Producto', 'Precio', 'Acción'];
+        headers.forEach(headerText => {
+            const th = document.createElement('th');
             th.textContent = headerText;
             headerRow.appendChild(th);
         });
         table.appendChild(headerRow);
 
         // Agregar los productos a la tabla
-        carrito.forEach(function(product, index) {
-            var row = document.createElement('tr');
+        carrito.forEach((product, index) => {
+            const row = document.createElement('tr');
 
             // Columna Producto
-            var productNameCell = document.createElement('td');
-            var productName = document.createElement('h3');
+            const productNameCell = document.createElement('td');
+            const productName = document.createElement('h3');
             productName.textContent = product.name;
             productNameCell.appendChild(productName);
 
             // Columna Precio
-            var productPriceCell = document.createElement('td');
-            var productPrice = document.createElement('p');
+            const productPriceCell = document.createElement('td');
+            const productPrice = document.createElement('p');
             productPrice.textContent = '$' + product.price;
             productPriceCell.appendChild(productPrice);
 
             // Columna Acción (Eliminar)
-            var actionCell = document.createElement('td');
-            var removeButton = document.createElement('button');
+            const actionCell = document.createElement('td');
+            const removeButton = document.createElement('button');
             removeButton.textContent = 'Quitar';
             removeButton.classList.add('btn-remove');
-            removeButton.addEventListener('click', function() {
+            removeButton.addEventListener('click', () => {
                 openModal(product, index);
             });
             actionCell.appendChild(removeButton);
@@ -181,7 +182,7 @@ function displayCart() {
         grid.appendChild(table);
 
         // Agregar el total y el botón de compra ahora
-        var totalRow = document.createElement('div');
+        const totalRow = document.createElement('div');
         totalRow.classList.add('cart-total');
         totalRow.innerHTML = `
             <p>Total: $${total.toFixed(2)}</p>
@@ -192,12 +193,12 @@ function displayCart() {
         // Agregar el evento para la compra
         const buyButton = document.getElementById('buyButton');
         if (buyButton) {
-            buyButton.addEventListener('click', function() {
+            buyButton.addEventListener('click', () => {
                 openPaymentForm();
             });
         }
     }
-}
+};
 
 // -------------------- Eliminar producto --------------------
 let productToRemove = null;
