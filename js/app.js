@@ -307,7 +307,6 @@ const addToCart = (productName, price) => {
     if (alreadyInCart) {
         Swal.fire({
             title: "¡Ya posee esta skin en el carrito!",
-            text: "Por favor, continúe con su compra. ¡Gracias!",
             icon: "info",
             showClass: {
                 popup: `animate__animated animate__fadeInUp animate__faster`
