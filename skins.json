@@ -1,0 +1,230 @@
+{
+    "ofertas": [
+    {
+        "imagen": "./img/skin-protocol-spectre.jpg",
+        "arma": "SPECTRE",
+        "skin": "PROTOCOL",
+        "precio_anterior": 2115,
+        "precio": 1830
+    },
+    {
+        "imagen": "./img/skin-neo-frontier-phantom.jpg",
+        "arma": "PHANTOM",
+        "skin": "NEO FRONTIER",
+        "precio_anterior": 2175,
+        "precio": 1900
+    },
+    {
+        "imagen": "./img/skin-oni2.0-bulldog.jpg",
+        "arma": "BULLDOG",
+        "skin": "ONI 2.0",
+        "precio_anterior": 2375,
+        "precio": 2050
+    },
+    {
+        "imagen": "./img/skin-valiant-ares.jpg",
+        "arma": "ARES",
+        "skin": "VALIANT",
+        "precio_anterior": 1775,
+        "precio": 1170
+    },
+    {
+        "imagen": "./img/skin-game-operator.jpg",
+        "arma": "OPERATOR",
+        "skin": "GAME",
+        "precio_anterior": 2375,
+        "precio": 2000
+    },
+    {
+        "imagen": "./img/skin-valiant-ghost.jpg",
+        "arma": "GHOST",
+        "skin": "VALIANT",
+        "precio_anterior": 1775,
+        "precio": 1410
+    },
+    {
+        "imagen": "./img/skin-protocol-phantom.jpg",
+        "arma": "PHANTOM",
+        "skin": "PROTOCOL",
+        "precio_anterior": 2370,
+        "precio": 1975
+    },
+    {
+        "imagen": "./img/skin-neo-frontier-knife2.jpg",
+        "arma": "KNIFE",
+        "skin": "NEO FRONTIER",
+        "precio_anterior": 2475,
+        "precio": 2195
+    },
+    {
+        "imagen": "./img/skin-neo-frontier-marshall.jpg",
+        "arma": "MARSHALL",
+        "skin": "NEO FRONTIER",
+        "precio_anterior": 2475,
+        "precio": 2030
+    },
+    {
+        "imagen": "./img/skin-protocol-sheriff.jpg",
+        "arma": "SHERIF",
+        "skin": "PROTOCOL",
+        "precio_anterior": 2115,
+        "precio": 1685
+    },
+    {
+        "imagen": "./img/skin-game-ghost.jpg",
+        "arma": "GHOST",
+        "skin": "GAME",
+        "precio_anterior": 2175,
+        "precio": 1780
+    },
+    {
+        "imagen": "./img/skin-oni2.0-vandal.jpg",
+        "arma": "VANDAL",
+        "skin": "ONI 2.0",
+        "precio_anterior": 2375,
+        "precio": 2155
+    }
+    ],
+    "mercado_nocturno": [
+    {
+        "imagen": "./img/skin-chronovoid-phantom-mercado-nocturno.jpg",
+        "arma": "PHANTOM",
+        "skin": "CHRONOVOID",
+        "precio_anterior": 2500,
+        "precio": 1850
+    },
+    {
+        "imagen": "./img/skin-glichtpop2.0-vandal-mercado-nocturno.jpg",
+        "arma": "VANDAL",
+        "skin": "GLICHTPOP 2.0",
+        "precio_anterior": 2175,
+        "precio": 1950
+    },
+    {
+        "imagen": "./img/skin-prelude-chaos-knife-mercado-nocturno.jpg",
+        "arma": "KNIFE",
+        "skin": "PRELUDE CHAOS",
+        "precio_anterior": 2175,
+        "precio": 1655
+    },
+    {
+        "imagen": "./img/skin-mega-punk-sherif-mercado-nocturno.jpg",
+        "arma": "SHERIF",
+        "skin": "MEGA PUNK",
+        "precio_anterior": 2000,
+        "precio": 1300
+    },
+    {
+        "imagen": "./img/skin-aemondir-bulldog-mercado-nocturno.jpg",
+        "arma": "BULLDOG",
+        "skin": "AEMONDIR",
+        "precio_anterior": 3400,
+        "precio": 2180
+    },
+    {
+        "imagen": "./img/skin-gaia-vengance-ghost-mercado-nocturno.jpg",
+        "arma": "GHOST",
+        "skin": "GAIA'S VENGANCE",
+        "precio_anterior": 1775,
+        "precio": 985
+    }
+    ],
+    "tienda": [
+    {
+        "nombre": "ARAXYS",
+        "skin": "COLLECTION",
+        "imagen_principal": "./img/pack-skin-araxys.jpg",
+        "precio": "7100",
+        "subitems": [
+        {
+            "imagen": "./img/skin-araxys-bulldog.jpg",
+            "skin": "ARAXYS",
+            "arma": "BULLDOG",
+            "precio": 1775
+        },
+        {
+            "imagen": "./img/skin-araxys-operator.jpg",
+            "skin": "ARAXYS",
+            "arma": "OPERATOR",
+            "precio": 1775
+        },
+        {
+            "imagen": "./img/skin-araxys-vandal.jpg",
+            "skin": "ARAXYS",
+            "arma": "OPERATOR",
+            "precio": 1775
+        },
+        {
+            "imagen": "./img/skin-araxys-knife-shorty.jpg",
+            "skin": "ARAXYS",
+            "arma": "KNIFE & SHORTY",
+            "precio": 1775
+        }
+        ]
+    },
+    {
+        "nombre": "PRIME 2.0",
+        "skin": "COLLECTION",
+        "imagen_principal": "./img/pack-skin-prime2.0.jpg",
+        "precio": "10150",
+        "subitems": [
+        {
+            "imagen": "./img/skin-prime2.0-odin.jpg",
+            "skin": "PRIME 2.0",
+            "arma": "ODIN",
+            "precio": 2175
+        },
+        {
+            "imagen": "./img/skin-prime2.0-knife-frenzy.jpg",
+            "skin": "PRIME 2.0",
+            "arma": "KNIFE & FRENZY",
+            "precio": 2175
+        },
+        {
+            "imagen": "./img/skin-prime2.0-phantom.jpg",
+            "skin": "PRIME 2.0",
+            "arma": "PHANTOM",
+            "precio": 2175
+        },
+        {
+            "imagen": "./img/skin-prime2.0-bucky.jpg",
+            "skin": "PRIME 2.0",
+            "arma": "BUCKY",
+            "precio": 2175
+        }
+        ]
+    },
+    {
+        "nombre": "GAIA'S",
+        "skin": "COLLECTION",
+        "imagen_principal": "./img/pack-skin-gaia.jpg",
+        "precio": "9900",
+        "subitems": [
+        {
+            "imagen": "./img/skin-gaia-phantom.jpg",
+            "skin": "GAIA'S",
+            "arma": "PHANTOM",
+            "precio": 2475
+        },
+        {
+            "imagen": "./img/skin-gaia-ares.jpg",
+            "skin": "GAIA'S",
+            "arma": "ARES",
+            "precio": 2475
+        },
+        {
+            "imagen": "./img/skin-gaia-shorty.jpg",
+            "skin": "GAIA'S",
+            "arma": "SHORTY",
+            "precio": 2475
+        },
+        {
+            "imagen": "./img/skin-gaia-bucky.jpg",
+            "skin": "GAIA'S",
+            "arma": "BUCKY",
+            "precio": 2475
+        }
+        ]
+    }
+    ]
+}
