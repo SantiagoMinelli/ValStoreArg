@@ -36,7 +36,7 @@ const validateCardNumber = (cardNumber) => {
 const checkFormCompletion = () => {
     const inputs = [...document.querySelectorAll('#payment-form input')];
     const allFilled = inputs.every(input => input.value.trim() !== '');
-    const cardNumber = document.getElementById('card-number').value.trim();
+    const cardNumber = document.getElementById('card-number').value.replace(/\s+/g, '').trim();
     const isCardValid = validateCardNumber(cardNumber);
     document.getElementById('buy').disabled = !(allFilled && isCardValid);
 };
@@ -49,46 +49,222 @@ document.getElementById('closePaymentFormUp')?.addEventListener('click', () => t
 
 document.getElementById('payment-form')?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const cardNumber = document.getElementById('card-number').value.trim();
+
+    const cardNumber = document.getElementById('card-number').value.replace(/\s+/g, '').trim();
     const cardName = document.getElementById('card-name').value.trim();
     const expiryDate = document.getElementById('expiry-date').value.trim();
     const cvv = document.getElementById('cvv').value.trim();
     const dni = document.getElementById('dni').value.trim();
 
+    // Validar número de tarjeta
     if (!validateCardNumber(cardNumber)) {
-        alert("Número de tarjeta inválido.");
+        Swal.fire({
+            title: "¡Número de tarjeta inválido!",
+            text: "Por favor, verifique que los datos sean correctos",
+            icon: "warning",
+            showConfirmButton: true,
+            showClass: {
+                popup: `animate__animated animate__fadeInUp animate__faster`
+            },
+            hideClass: {
+                popup: `animate__animated animate__fadeOutDown animate__faster`
+            }
+        });
         return;
     }
 
+    // Validar si todos los datos están completos
     if ([cardName, expiryDate, cvv, dni].some(val => val === '')) {
-        alert("Por favor, complete todos los campos.");
+        Swal.fire({
+            title: "¡Algo falta!",
+            text: "Por favor, complete todos los campos",
+            icon: "warning",
+            showConfirmButton: true,
+            showClass: {
+                popup: `animate__animated animate__fadeInUp animate__faster`
+            },
+            hideClass: {
+                popup: `animate__animated animate__fadeOutDown animate__faster`
+            }
+        });
         return;
     }
 
-    carrito = [];
-    localStorage.setItem('cart', JSON.stringify(carrito));
-    toggleModal('paymentForm', false);
-    displayCart();
-    updateProductCount();
+    // Validar DNI
+    if (!/^\d{7,8}$/.test(dni)) {
+        Swal.fire({
+            title: "¡DNI inválido!",
+            text: "El DNI debe tener entre 7 y 8 dígitos numéricos.",
+            icon: "warning",
+            showConfirmButton: true,
+            showClass: {
+                popup: `animate__animated animate__fadeInUp animate__faster`
+            },
+            hideClass: {
+                popup: `animate__animated animate__fadeOutDown animate__faster`
+            }
+        });
+        return;
+    }
 
+    // Validar formato de fecha
+    const expiryPattern = /^\d{2}\/\d{2}$/;
+    if (!expiryPattern.test(expiryDate)) {
+        Swal.fire({
+            title: "¡Fecha de vencimiento inválida!",
+            text: "Use el formato MM/AA",
+            icon: "warning",
+            showConfirmButton: true,
+            showClass: {
+                popup: `animate__animated animate__fadeInUp animate__faster`
+            },
+            hideClass: {
+                popup: `animate__animated animate__fadeOutDown animate__faster`
+            }
+        });
+        return;
+    }
+
+    // Validar que el mes sea correcto
+    const [month, year] = expiryDate.split('/').map(Number);
+    if (month < 1 || month > 12) {
+        Swal.fire({
+            title: "¡El mes ingresado no es válido!",
+            text: "Debe ingresar con el formato entre el 01 y 12",
+            icon: "warning",
+            showConfirmButton: true,
+            showClass: {
+                popup: `animate__animated animate__fadeInUp animate__faster`
+            },
+            hideClass: {
+                popup: `animate__animated animate__fadeOutDown animate__faster`
+            }
+        });
+        return;
+    }
+
+    // Validar que la fecha de la tarjeta no esté vencida
+    const currentDate = new Date();
+    const currentYear = Number(currentDate.getFullYear().toString().slice(2)); // últimos dos dígitos
+    const currentMonth = currentDate.getMonth() + 1;
+
+    if (year < currentYear || (year === currentYear && month < currentMonth)) {
+        Swal.fire({
+            title: "¡Lo sentimos!",
+            text: "La fecha nos indica que su tarjeta está vencida",
+            icon: "warning",
+            showConfirmButton: true,
+            showClass: {
+                popup: `animate__animated animate__fadeInUp animate__faster`
+            },
+            hideClass: {
+                popup: `animate__animated animate__fadeOutDown animate__faster`
+            }
+        });
+        return;
+    }
+
+    // Mostrar modal de carga de pago
     Swal.fire({
-        title: "¡Compra realizada con éxito!",
-        text: "Muchas gracias por comprar con ValStore ARG",
-        icon: "success",
+        title: 'Procesando pago ...',
+        html: `
+            <div style="width: 120px; height: 120px; margin: 0 auto 20px auto; background: #e0e0e0; border-radius: 10px; overflow: hidden; position: relative;">
+                <div id="image-reveal" style="width: 0%; height: 100%; overflow: hidden; position: absolute; top: 0; left: 0;">
+                    <img src="./img/icono-pestaña.png" alt="Cargando" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
+            </div>
+        `,
         showConfirmButton: false,
-        timer: 3500,
-        showClass: {
-            popup: `animate__animated animate__fadeInUp animate__faster`
-        },
-        hideClass: {
-            popup: `animate__animated animate__fadeOutDown animate__faster`
+        allowOutsideClick: false,
+        didOpen: () => {
+            const reveal = Swal.getPopup().querySelector('#image-reveal');
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 2.5;
+                reveal.style.width = `${width}%`;
+                if (width >= 100) clearInterval(interval);
+            }, 100);
         }
     });
+
+    // Esperar 5 segundos antes de mostrar el mensaje final
+    setTimeout(() => {
+        carrito = [];
+        localStorage.setItem('cart', JSON.stringify(carrito));
+        toggleModal('paymentForm', false);
+        displayCart();
+        updateProductCount();
+
+        Swal.fire({
+            title: "¡Compra realizada con éxito!",
+            text: "Muchas gracias por comprar con ValStore ARG",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 3500,
+            showClass: {
+                popup: `animate__animated animate__fadeInUp animate__faster`
+            },
+            hideClass: {
+                popup: `animate__animated animate__fadeOutDown animate__faster`
+            }
+        });
+    }, 5000);
 });
 
+// -------------------- Autocompletado para MM/AA --------------------
+document.getElementById('expiry-date')?.addEventListener('input', (e) => {
+    let value = e.target.value;
+
+    // Quitar cualquier carácter que no sea dígito o "/"
+    value = value.replace(/[^\d/]/g, '');
+
+    // Agregar "/" automáticamente después del segundo número
+    if (value.length === 2 && !value.includes('/')) {
+        value = value + '/';
+    }
+
+    // Limitar a 5 caracteres (4 nros y la barra)
+    if (value.length > 5) {
+        value = value.slice(0, 5);
+    }
+
+    e.target.value = value;
+    checkFormCompletion();
+});
+
+// -------------------- Autocompletar Apellido y Nombre en mayúsculas --------------------
+document.getElementById('card-name')?.addEventListener('input', (e) => {
+    e.target.value = e.target.value.toUpperCase();
+    checkFormCompletion();
+});
+
+// -------------------- Formatear número de tarjeta [4,4,4,4] --------------------
+document.getElementById('card-number')?.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\D/g, '');
+
+    // Patrón utilizado en tarjetas como Visa, Mastercard
+    const pattern = [4, 4, 4, 4]; 
+    let formatted = '';
+    let index = 0;
+
+    // Añade el espacio cuando se va completando el patron
+    for (let i = 0; i < pattern.length && index < value.length; i++) {
+        const segment = value.substr(index, pattern[i]);
+        formatted += segment + ' ';
+        index += pattern[i];
+    }
+
+    formatted = formatted.trim();
+    e.target.value = formatted;
+
+    checkFormCompletion();
+});
+
+// -------------------- Verificación de inputs --------------------
 document.querySelectorAll('#payment-form input').forEach(input =>
     input.addEventListener('input', checkFormCompletion)
 );
+
 
 // -------------------- Cargar datos de skins --------------------
 const getSkins = async () => {
